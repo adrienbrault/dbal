@@ -134,7 +134,7 @@ class QueryBuilder
      * For more complex expression construction, consider storing the expression
      * builder object in a local variable.
      *
-     * @return Doctrine\DBAL\Query\ExpressionBuilder
+     * @return Doctrine\DBAL\Query\Expression\ExpressionBuilder
      */
     public function expr()
     {
