@@ -1775,7 +1775,7 @@ abstract class AbstractPlatform
                     ' ' . $field['check'] : '';
 
             $typeDecl = $field['type']->getSqlDeclaration($field, $this);
-            $columnDef = $typeDecl . $charset . $default . $notnull . $unique . $check . $collation;
+            $columnDef = $typeDecl . $default . $notnull . $unique . $check . $charset . $collation;
         }
 
         if ($this->supportsInlineColumnComments() && isset($field['comment']) && $field['comment']) {
