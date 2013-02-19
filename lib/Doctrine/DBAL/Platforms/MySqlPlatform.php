@@ -748,6 +748,6 @@ class MySqlPlatform extends AbstractPlatform
      */
     public function getColumnCollationDeclarationSQL($collation)
     {
-        return 'COLLATION ' . $collation;
+        return 'COLLATE ' . $collation;
     }
 }

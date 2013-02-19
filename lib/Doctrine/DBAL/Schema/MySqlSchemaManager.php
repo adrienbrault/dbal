@@ -113,6 +113,11 @@ class MySqlSchemaManager extends AbstractSchemaManager
         $type = $this->extractDoctrineTypeFromComment($tableColumn['comment'], $type);
         $tableColumn['comment'] = $this->removeDoctrineTypeFromComment($tableColumn['comment'], $type);
 
+        $platformOptions = array(
+            'collate' => $tableColumn['collactionname'],
+            'charset' => $tableColumn['characterset'],
+        );
+
         switch ($dbType) {
             case 'char':
                 $fixed = true;
@@ -141,6 +146,9 @@ class MySqlSchemaManager extends AbstractSchemaManager
             case 'year':
                 $length = null;
                 break;
+            case 'timestamp':
+                $platformOptions['version'] = true;
+                break;
         }
 
         $length = ((int) $length == 0) ? null : (int) $length;
@@ -162,7 +170,10 @@ class MySqlSchemaManager extends AbstractSchemaManager
             $options['precision'] = $precision;
         }
 
-        return new Column($tableColumn['field'], \Doctrine\DBAL\Types\Type::getType($type), $options);
+        $column = new Column($tableColumn['field'], \Doctrine\DBAL\Types\Type::getType($type), $options);
+        $column->setPlatformOptions($platformOptions);
+
+        return $column;
     }
 
     protected function _getPortableTableForeignKeysList($tableForeignKeys)

@@ -463,7 +463,7 @@ abstract class AbstractPlatformTestCase extends \Doctrine\Tests\DbalTestCase
 
         $field = array(
             'charset' => $charset,
-            'collation' => $collation,
+            'collate' => $collation,
             'type' => $type,
         );
 
